@@ -1,5 +1,6 @@
 package com.mobileapps2.projectplanner.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.mobileapps2.projectplanner.R;
+import com.mobileapps2.projectplanner.ui.boards.BoardActivity;
 
 public class HomeFragment extends Fragment {
 
