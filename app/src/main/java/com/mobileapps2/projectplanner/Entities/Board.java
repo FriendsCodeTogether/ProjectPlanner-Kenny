@@ -19,6 +19,9 @@ public class Board implements Serializable {
     @ColumnInfo(name = "board_name")
     @NonNull public String boardName;
 
+    @ColumnInfo(name = "board_description")
+    @NonNull public  String boardDescription;
+
     @ColumnInfo(name = "team_id")
     @NonNull public String teamId;
 

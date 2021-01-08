@@ -17,4 +17,9 @@
     <string name="noTeamsLabel">You do not have any teams yet</string>
     <string name="contentDescription">Uitbreiding</string>
     <string name="addTeamTitle">Create New Team</string>
+    <string name="teamNameHint">Team Name</string>
+    <string name="SaveButton">Save</string>
+    <string name="CancelButton">Cancel</string>
+    <string name="boards">Boards</string>
+    <string name="noBoardsLabel">This team doesn\'t have any boards yet</string>
 </resources>

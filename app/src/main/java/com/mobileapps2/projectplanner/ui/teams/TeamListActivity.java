@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.mobileapps2.projectplanner.R;
 import com.mobileapps2.projectplanner.adapters.TeamListAdapter;
 import com.mobileapps2.projectplanner.data.DAOs.TeamDAO;
 import com.mobileapps2.projectplanner.data.DAOs.TeamDAO_Impl;
+import com.mobileapps2.projectplanner.ui.boards.BoardListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,7 @@ public class TeamListActivity extends AppCompatActivity {
 
     private ProjectPlannerDb db;
     private TeamDAO teamDAO;
-    private List<Team> teamList;
+    private ArrayList<Team> teamList = new ArrayList<>();
     private TextView noTeamsLabel;
     private ListView teamListView;
     private ImageButton createTeamButton;
@@ -52,6 +54,12 @@ public class TeamListActivity extends AppCompatActivity {
         createTeamButton.setOnClickListener(v -> {
             Intent intent = new Intent(this,AddTeamActivity.class);
             startActivityForResult(intent,REQUEST_ADD_TEAM);
+        });
+        teamListView.setOnItemClickListener((parent, view, position, id) -> {
+            Team team = teamList.get(position);
+            Intent intent = new Intent(this, BoardListActivity.class);
+            intent.putExtra("team", team);
+            startActivity(intent);
         });
     }
 
@@ -78,15 +86,16 @@ public class TeamListActivity extends AppCompatActivity {
     }
 
     private void getListItems() {
-        teamList = new ArrayList<>();
-        teamList = teamDAO.getAllTeams();
+        teamList.clear();
+        teamList.addAll(teamDAO.getAllTeams());
         if (teamList.size()==0)
         {
             noTeamsLabel.setVisibility(View.VISIBLE);
         }
         else
         {
-            TeamListAdapter adapter = new TeamListAdapter(this, R.layout.team_list_item, (ArrayList<Team>) teamList);
+            noTeamsLabel.setVisibility(View.INVISIBLE);
+            TeamListAdapter adapter = new TeamListAdapter(this, R.layout.team_list_item, teamList);
             teamListView.setAdapter(adapter);
         }
     }

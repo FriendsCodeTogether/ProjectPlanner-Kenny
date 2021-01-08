@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.mobileapps2.projectplanner.R;
-import com.mobileapps2.projectplanner.ui.boards.BoardActivity;
+import com.mobileapps2.projectplanner.ui.boards.BoardListActivity;
 import com.mobileapps2.projectplanner.ui.teams.TeamListActivity;
 
 public class HomeFragment extends Fragment {
@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
         navigateTeamsBtn = (ImageButton) root.findViewById(R.id.NavigateTeamBtn);
 
         navigateBoardsBtn.setOnClickListener((v -> {
-            Intent intent = new Intent(getActivity(),BoardActivity.class);
+            Intent intent = new Intent(getActivity(), BoardListActivity.class);
             startActivity(intent);
         }));
 

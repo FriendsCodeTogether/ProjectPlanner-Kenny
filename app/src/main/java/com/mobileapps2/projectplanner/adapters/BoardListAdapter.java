@@ -11,18 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.mobileapps2.projectplanner.Entities.Team;
+import com.mobileapps2.projectplanner.Entities.Board;
 import com.mobileapps2.projectplanner.R;
 
 import java.util.ArrayList;
 
-public class TeamListAdapter extends ArrayAdapter<Team> {
-
+public class BoardListAdapter  extends ArrayAdapter<Board> {
     private Context context;
     int resource;
 
-    public TeamListAdapter(Context c, int resource, ArrayList<Team> teams) {
-        super(c, resource, teams);
+    public BoardListAdapter(Context c, int resource, ArrayList<Board> boards) {
+        super(c, resource, boards);
         this.context = c;
         this.resource = resource;
     }
@@ -31,18 +30,18 @@ public class TeamListAdapter extends ArrayAdapter<Team> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         //Get current Team
-        Team team = getItem(position);
+        Board board = getItem(position);
 
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(resource, parent, false);
 
         //Get views to set
-        ImageView image = convertView.findViewById(R.id.TeamLogo);
-        TextView teamName = convertView.findViewById(R.id.teamName);
+        ImageView image = convertView.findViewById(R.id.BoardLogo);
+        TextView boardName = convertView.findViewById(R.id.boardName);
 
         //Set views
         // image.setImageResource(teams[position].image);
-        teamName.setText(team.teamName);
+        boardName.setText(board.boardName);
 
         return convertView;
     }
