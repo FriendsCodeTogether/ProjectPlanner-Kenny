@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "907839040840",
+    "firebase_url": "https://projectplanner-aec09.firebaseio.com",
+    "project_id": "projectplanner-aec09",
+    "storage_bucket": "projectplanner-aec09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907839040840:android:da3efa6e7ecc55a53cd77d",
+        "android_client_info": {
+          "package_name": "com.mobileapps2.projectplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907839040840-o43juchvi31lacug9dqad5fs35adui9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmcvj9TQ8iIM8WJ7dm8l_RvZRpfqZIZzg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907839040840-o43juchvi31lacug9dqad5fs35adui9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
