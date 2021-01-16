@@ -14,7 +14,7 @@
         android:text="@string/LoginText"
         app:layout_constraintEnd_toEndOf="@+id/StartupWelcomeText"
         app:layout_constraintStart_toStartOf="@+id/StartupWelcomeText"
-        app:layout_constraintTop_toBottomOf="@+id/StartupWelcomeText"></Button>>
+        app:layout_constraintTop_toBottomOf="@+id/StartupWelcomeText"/>
 
     <Button
         android:id="@+id/RegisterButton"
@@ -25,10 +25,10 @@
         android:text="@string/RegisterText"
         app:layout_constraintEnd_toEndOf="@+id/LoginButton"
         app:layout_constraintStart_toStartOf="@+id/LoginButton"
-        app:layout_constraintTop_toBottomOf="@+id/StartupOrText" />
+        app:layout_constraintTop_toBottomOf="@+id/OrText" />
 
     <TextView
-        android:id="@+id/StartupOrText"
+        android:id="@+id/OrText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

@@ -26,6 +26,10 @@
     <string name="OrText">Or</string>
     <string name="LoginText">Login</string>
     <string name="RegisterText">Register</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="verifyPasswordText">Password check</string>
+    <string name="EmailHint">Email</string>
+    <string name="UserNameHint">User Name</string>
+    <string name="AlreadyAccountText">Already have an account?</string>
+    <string name="PasswordHint">Password</string>
+    <string name="NoAccountYet">don\'t have an account?</string>
 </resources>

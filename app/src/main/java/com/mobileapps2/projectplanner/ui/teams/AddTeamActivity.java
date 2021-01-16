@@ -74,7 +74,7 @@ public class AddTeamActivity extends AppCompatActivity {
 
     private boolean verifyIfUnique(String name) {
         for (Team team : teamList) {
-            if (team.teamName == name) return false;
+            if (team.teamName.equals(name)) return false;
         }
         return true;
     }
