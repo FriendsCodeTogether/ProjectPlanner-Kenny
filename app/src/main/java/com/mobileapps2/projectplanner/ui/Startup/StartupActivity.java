@@ -22,9 +22,9 @@ private Button registerButton;
         registerButton = findViewById(R.id.RegisterButton);
 
         loginButton.setOnClickListener((v->{
-            //TODO: Remove this comment to continue on login
-            Intent intent = new Intent(this, TeamListActivity.class);
-            //Intent intent = new Intent(this, LoginActivity.class);
+            //TODO: Remove next comment before presentation
+            //Intent intent = new Intent(this, TeamListActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }));
         registerButton.setOnClickListener((v->{

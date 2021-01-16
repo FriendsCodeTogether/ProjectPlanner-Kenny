@@ -13,12 +13,11 @@ import com.mobileapps2.projectplanner.Entities.User;
 import com.mobileapps2.projectplanner.ProjectPlannerDb;
 import com.mobileapps2.projectplanner.R;
 import com.mobileapps2.projectplanner.data.DAOs.UserDAO;
+import com.mobileapps2.projectplanner.ui.MyGlobals;
 import com.mobileapps2.projectplanner.ui.teams.TeamListActivity;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -31,6 +30,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private EditText verifyPasswordEditText;
     private EditText emailEditText;
+
+    private MyGlobals myGlobals;
+
     private ArrayList<User>userList = new ArrayList<>();
     private Pattern emailPattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+");
     private Pattern passwordPattern = Pattern.compile("^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$");
@@ -41,8 +43,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         initializeDatabase();
-        initializeViewElements();
+        initializeElements();
         setListeners();
+
     }
 
     private void setListeners() {
@@ -60,13 +63,14 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeViewElements() {
+    private void initializeElements() {
         loginButton = findViewById(R.id.RegisterPageLoginButton);
         registerButton = findViewById(R.id.RegisterPageRegisterButton);
         userNameEditText = findViewById(R.id.RegisterNameEditText);
         emailEditText = findViewById(R.id.EmailAddressEditText);
         passwordEditText = findViewById(R.id.PasswordEditText);
         verifyPasswordEditText = findViewById(R.id.VerifyPasswordEditText);
+        myGlobals =  new MyGlobals(getApplicationContext());
     }
 
     private void verifyFieldsAndSave() throws NoSuchProviderException, NoSuchAlgorithmException {
@@ -91,8 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else{
             User newUser = new User();
-            byte[] salt = getSalt();
-            String securePassword = getSecurePassword(password, salt);
+            String securePassword = myGlobals.getSecurePassword(password);
 
             newUser.userName = userName;
             newUser.email = email;
@@ -127,39 +130,4 @@ public class RegisterActivity extends AppCompatActivity {
         userDAO = db.getUserDAO();
     }
 
-    private static byte[] getSalt() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchProviderException {
-        //Always use a SecureRandom generator
-        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-        //Create array for salt
-        byte[] salt = new byte[16];
-        //Get a random salt
-        sr.nextBytes(salt);
-        //return salt
-        return salt;
-    }
-
-    private static String getSecurePassword(String passwordToHash, byte[] salt) {
-        String generatedPassword = null;
-        try {
-            // Create MessageDigest instance for MD5
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            //Add password bytes to digest
-            md.update(salt);
-            //Get the hash's bytes
-            byte[] bytes = md.digest(passwordToHash.getBytes());
-            //This bytes[] has bytes in decimal format;
-            //Convert it to hexadecimal format
-            StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++)
-            {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            //Get complete hashed password in hex format
-            generatedPassword = sb.toString();
-        }
-        catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return generatedPassword;
-    }
 }

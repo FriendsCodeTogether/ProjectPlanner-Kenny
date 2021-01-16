@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mobileapps2.projectplanner.Entities.User;
 import com.mobileapps2.projectplanner.ProjectPlannerDb;
 import com.mobileapps2.projectplanner.R;
 import com.mobileapps2.projectplanner.data.DAOs.UserDAO;
+import com.mobileapps2.projectplanner.ui.MyGlobals;
+import com.mobileapps2.projectplanner.ui.teams.TeamListActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
@@ -19,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText userNameEditText;
     private ProjectPlannerDb db;
     private UserDAO userDAO;
+    private MyGlobals myGlobals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initializeDatabase();
-        initializeViewElements();
+        initializeElements();
         setListeners();
     }
     private void setListeners() {
@@ -42,14 +46,29 @@ public class LoginActivity extends AppCompatActivity {
     private void VerifyFieldsAndLogin() {
         String userName = userNameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
+        String hashedPassword = myGlobals.getSecurePassword(password);
         User user = userDAO.getUserByUserName(userName);
+
+        if (user == null){
+            Toast.makeText(this, "This username does not exist", Toast.LENGTH_SHORT).show();
+        }
+        else if(!user.password.equals(hashedPassword)){
+            Toast.makeText(this, "This password is incorrect", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            //TODO: USER LOGGED IN PREFERENCE
+            Intent intent = new Intent(this, TeamListActivity.class);
+            intent.putExtra("userName",user.userName);
+            startActivity(intent);
+        }
     }
 
-    private void initializeViewElements() {
+    private void initializeElements() {
         loginButton = findViewById(R.id.LoginPageLoginButton);
         registerButton = findViewById(R.id.LoginPageRegisterButton);
         passwordEditText = findViewById(R.id.LoginPasswordEditText);
         userNameEditText = findViewById(R.id.LoginNameEditText);
+        myGlobals = new MyGlobals(getApplicationContext());
     }
 
     private void initializeDatabase() {
