@@ -3,6 +3,10 @@ package com.mobileapps2.projectplanner.ui.Startup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+<<<<<<< Updated upstream
+=======
+import android.content.SharedPreferences;
+>>>>>>> Stashed changes
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,15 +27,31 @@ public class LoginActivity extends AppCompatActivity {
     private ProjectPlannerDb db;
     private UserDAO userDAO;
     private MyGlobals myGlobals;
+<<<<<<< Updated upstream
+=======
+    private SharedPreferences.Editor editor;
+    SharedPreferences pref;
+>>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+<<<<<<< Updated upstream
 
         initializeDatabase();
         initializeElements();
         setListeners();
+=======
+        if (!pref.getString("loggedInUser",null).contains("init")){
+         Intent intent = new Intent(this,TeamListActivity.class);
+         intent.putExtra("userName",pref.getString("loggedInUser",null));
+        }
+        initializeDatabase();
+        initializeElements();
+        setListeners();
+
+>>>>>>> Stashed changes
     }
     private void setListeners() {
         registerButton.setOnClickListener(v->{
@@ -59,6 +79,11 @@ public class LoginActivity extends AppCompatActivity {
             //TODO: USER LOGGED IN PREFERENCE
             Intent intent = new Intent(this, TeamListActivity.class);
             intent.putExtra("userName",user.userName);
+<<<<<<< Updated upstream
+=======
+            editor.putString("loggedInUser",user.userName);
+            editor.commit();
+>>>>>>> Stashed changes
             startActivity(intent);
         }
     }
@@ -69,6 +94,11 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.LoginPasswordEditText);
         userNameEditText = findViewById(R.id.LoginNameEditText);
         myGlobals = new MyGlobals(getApplicationContext());
+<<<<<<< Updated upstream
+=======
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0);// 0 - for private mode
+        editor = pref.edit();
+>>>>>>> Stashed changes
     }
 
     private void initializeDatabase() {
