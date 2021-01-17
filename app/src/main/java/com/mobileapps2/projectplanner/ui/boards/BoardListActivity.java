@@ -33,7 +33,6 @@ public class BoardListActivity extends AppCompatActivity {
     private final static int REQUEST_ADD_BOARD = 1;
     private final static int REQUEST_DELETE_BOARD = 2;
     private static final int REQUEST_EDIT_TEAM = 3;
-    private static final int REQUEST_DELETE_TEAM = 4;
 
     private ProjectPlannerDb db;
     private TeamDAO teamDAO;
@@ -55,7 +54,6 @@ public class BoardListActivity extends AppCompatActivity {
         addToolbar();
         getListItems();
         setListeners();
-        //TODO: Change BoardName => TeamName: Boards
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,11 +62,14 @@ public class BoardListActivity extends AppCompatActivity {
     }
 
     private void getListItems() {
+        Team team = teamDAO.getTeamById(this.team.id);
+        teamName.setText(team.teamName);
         boardList.clear();
         boardList.addAll(boardDAO.getAllBoards());
         if (boardList.size()==0)
         {
             noBoardsLabel.setVisibility(View.VISIBLE);
+            boardListView.setAdapter(null);
         }
         else
         {
@@ -81,6 +82,7 @@ public class BoardListActivity extends AppCompatActivity {
     private void setListeners() {
         createBoardButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddBoardActivity.class);
+            intent.putExtra("team",team);
             startActivityForResult(intent,REQUEST_ADD_BOARD);
         });
     }
@@ -129,14 +131,9 @@ public class BoardListActivity extends AppCompatActivity {
         case REQUEST_EDIT_TEAM:
                 switch (resultCode) {
                     case RESULT_OK:
-                        String editedTeamName = data.getStringExtra("editedTeamName");
+                        String editedTeamName = data.getStringExtra("updatedTeamName");
                         Toast.makeText(this, editedTeamName + " Edited", Toast.LENGTH_SHORT).show();
                         getListItems();
-/*                        Intent intent = new Intent();
-                        intent.putExtra("editedTeam",team);
-                        setResult(RESULT_OK,intent);
-                        finish();*/
-                        //TODO: Make BoardTitle content Change
                         break;
                     case RESULT_CANCELED:
                         getListItems();

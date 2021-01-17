@@ -35,4 +35,9 @@
     <string name="LogoutText">Logout</string>
     <string name="action_Edit">Edit</string>
     <string name="action_Delete">Delete</string>
+    <string name="EditTeamTitle">Edit Team</string>
+    <string name="addBoardTitle">Add Board</string>
+    <string name="BoardNameHint">Board Name</string>
+    <string name="BoardDescription">Description</string>
+    <string name="editBoardTitle">Edit Board</string>
 </resources>

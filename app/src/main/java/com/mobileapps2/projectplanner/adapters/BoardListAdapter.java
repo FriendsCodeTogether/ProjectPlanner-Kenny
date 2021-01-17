@@ -38,10 +38,12 @@ public class BoardListAdapter  extends ArrayAdapter<Board> {
         //Get views to set
         ImageView image = convertView.findViewById(R.id.BoardLogo);
         TextView boardName = convertView.findViewById(R.id.boardName);
+        TextView boardDescription = convertView.findViewById(R.id.boardDescription);
 
         //Set views
         // image.setImageResource(teams[position].image);
         boardName.setText(board.boardName);
+        boardDescription.setText(board.boardDescription);
 
         return convertView;
     }

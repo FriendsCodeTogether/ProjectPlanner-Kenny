@@ -116,7 +116,6 @@ public class TeamListActivity extends AppCompatActivity {
         {
             noTeamsLabel.setVisibility(View.INVISIBLE);
             TeamListAdapter adapter = new TeamListAdapter(this, R.layout.team_list_item, teamList);
-
             teamListView.setAdapter(adapter);
         }
     }
@@ -130,7 +129,6 @@ public class TeamListActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         //switch for the requests
         switch (requestCode) {
             case REQUEST_ADD_TEAM:
