@@ -95,4 +95,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"></ListView>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/LogoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/LogoutText"
+        app:layout_constraintBottom_toBottomOf="@+id/AddTeamButton"
+        app:layout_constraintEnd_toStartOf="@+id/AddTeamButton"
+        app:layout_constraintStart_toEndOf="@+id/teamsTitle"
+        app:layout_constraintTop_toTopOf="@+id/AddTeamButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -11,35 +12,42 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.mobileapps2.projectplanner.Entities.Team;
+import com.mobileapps2.projectplanner.Entities.User;
 import com.mobileapps2.projectplanner.ProjectPlannerDb;
 import com.mobileapps2.projectplanner.R;
 import com.mobileapps2.projectplanner.data.DAOs.TeamDAO;
+import com.mobileapps2.projectplanner.data.DAOs.UserDAO;
 
 import java.util.ArrayList;
 
 public class AddTeamActivity extends AppCompatActivity {
     private ProjectPlannerDb db;
     private TeamDAO teamDAO;
+    private UserDAO userDAO;
     private Button saveButton;
     private Button cancelButton;
     private EditText teamNameEditText;
     private ArrayList<Team> teamList = new ArrayList<>();
+    SharedPreferences pref;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_team);
-
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         initializeDatabase();
-        initializeViewElements();
+        initializeItems();
         addToolbar();
         setListeners();
     }
 
-    private void initializeViewElements() {
+    private void initializeItems() {
         saveButton = findViewById(R.id.CreateTeamSaveButton);
         cancelButton = findViewById(R.id.CreateTeamCancelButton);
         teamNameEditText = findViewById(R.id.textInputEditText);
+        Intent incomingIntent = getIntent();
+        user = (User) incomingIntent.getSerializableExtra("user");
     }
 
     private void setListeners() {
@@ -64,6 +72,7 @@ public class AddTeamActivity extends AppCompatActivity {
         else{
             Team newTeam = new Team();
             newTeam.teamName = teamName;
+            newTeam.userId = user.userId;
             teamDAO.insertTeam(newTeam);
             Intent intent = new Intent();
             intent.putExtra("addedTeamName", newTeam.teamName);
@@ -98,5 +107,6 @@ public class AddTeamActivity extends AppCompatActivity {
     private void initializeDatabase() {
         db = ProjectPlannerDb.getInstance(this);
         teamDAO = db.getTeamDAO();
+        userDAO = db.getUserDAO();
     }
 }

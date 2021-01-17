@@ -19,5 +19,8 @@ public class Team implements Serializable {
     @ColumnInfo(name = "team_name")
     @NonNull public String teamName;
 
+    @ColumnInfo(name = "user_id")
+    @NonNull public String userId;
+
     public Team() {this.teamId = UUID.randomUUID().toString();}
 }

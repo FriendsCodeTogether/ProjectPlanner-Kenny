@@ -20,9 +20,6 @@ public class User implements Serializable {
     @ColumnInfo(name = "user_name")
     @NonNull public String userName;
 
-    @ColumnInfo(name = "team_id")
-    @Nullable public String teamID;
-
     @ColumnInfo(name = "user_password")
     @NonNull public String password;
 
