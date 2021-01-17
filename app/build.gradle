@@ -23,7 +23,7 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src\\main\\res', 'src\\main\\res\\layouts', 'src\\main\\res\\layouts\\boards', 'src\\main\\res\\layouts\\Test', 'src\\main\\res\\layouts\\core', 'src\\main\\res\\layouts\\teams', 'src\\main\\res\\layouts\\startup'
+                srcDirs 'src\\main\\res', 'src\\main\\res\\layouts', 'src\\main\\res\\layouts\\boards', 'src\\main\\res\\layouts\\Test', 'src\\main\\res\\layouts\\core', 'src\\main\\res\\layouts\\teams', 'src\\main\\res\\layouts\\startup', 'src\\main\\res\\layouts\\tasks'
             }
         }
     }

@@ -4,8 +4,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,13 +17,14 @@ import android.widget.Toast;
 
 import com.mobileapps2.projectplanner.Entities.Board;
 import com.mobileapps2.projectplanner.Entities.Team;
+import com.mobileapps2.projectplanner.Entities.User;
 import com.mobileapps2.projectplanner.ProjectPlannerDb;
 import com.mobileapps2.projectplanner.R;
 import com.mobileapps2.projectplanner.adapters.BoardListAdapter;
-import com.mobileapps2.projectplanner.adapters.TeamListAdapter;
 import com.mobileapps2.projectplanner.data.DAOs.BoardDAO;
 import com.mobileapps2.projectplanner.data.DAOs.TeamDAO;
-import com.mobileapps2.projectplanner.ui.teams.AddTeamActivity;
+import com.mobileapps2.projectplanner.ui.teams.EditTeamActivity;
+import com.mobileapps2.projectplanner.ui.teams.TeamListActivity;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,7 @@ public class BoardListActivity extends AppCompatActivity {
 
     private final static int REQUEST_ADD_BOARD = 1;
     private final static int REQUEST_DELETE_BOARD = 2;
+    private static final int REQUEST_EDIT_TEAM = 3;
 
     private ProjectPlannerDb db;
     private TeamDAO teamDAO;
@@ -37,26 +41,35 @@ public class BoardListActivity extends AppCompatActivity {
     private ArrayList<Board> boardList = new ArrayList<>();
     private TextView noBoardsLabel;
     private ListView boardListView;
+    private TextView teamName;
     private ImageButton createBoardButton;
+    private Team team;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
-        //TODO: GET TEAM FROM PREVIOUS PAGE
         initializeDatabase();
-        initializeViewElements();
+        initializeElements();
         addToolbar();
         getListItems();
         setListeners();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
     private void getListItems() {
+        Team team = teamDAO.getTeamById(this.team.id);
+        teamName.setText(team.teamName);
         boardList.clear();
         boardList.addAll(boardDAO.getAllBoards());
         if (boardList.size()==0)
         {
             noBoardsLabel.setVisibility(View.VISIBLE);
+            boardListView.setAdapter(null);
         }
         else
         {
@@ -69,14 +82,19 @@ public class BoardListActivity extends AppCompatActivity {
     private void setListeners() {
         createBoardButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddBoardActivity.class);
+            intent.putExtra("team",team);
             startActivityForResult(intent,REQUEST_ADD_BOARD);
         });
     }
 
-    private void initializeViewElements() {
+    private void initializeElements() {
         noBoardsLabel = findViewById(R.id.noBoardsLabel);
         boardListView = findViewById(R.id.BoardsList);
         createBoardButton = findViewById(R.id.AddBoardButton);
+        teamName = findViewById(R.id.TeamName);
+        Intent incomingIntent = getIntent();
+        team = (Team) incomingIntent.getSerializableExtra("team");
+        teamName.setText(team.teamName);
     }
 
     @Override
@@ -110,6 +128,18 @@ public class BoardListActivity extends AppCompatActivity {
                         break;
                 }
                 break;
+        case REQUEST_EDIT_TEAM:
+                switch (resultCode) {
+                    case RESULT_OK:
+                        String editedTeamName = data.getStringExtra("updatedTeamName");
+                        Toast.makeText(this, editedTeamName + " Edited", Toast.LENGTH_SHORT).show();
+                        getListItems();
+                        break;
+                    case RESULT_CANCELED:
+                        getListItems();
+                        break;
+                }
+                break;
         }
     }
 
@@ -130,6 +160,26 @@ public class BoardListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                return true;
+            case R.id.action_Edit:
+                Intent intent = new Intent(this, EditTeamActivity.class);
+                intent.putExtra("team",team);
+                startActivityForResult(intent, REQUEST_EDIT_TEAM);
+                return true;
+            case R.id.action_Delete:
+                AlertDialog alertDialog = new AlertDialog.Builder(BoardListActivity.this).create();
+                alertDialog.setTitle("Oh No");
+                alertDialog.setMessage("Are you sure you want to delete this team: " + team.teamName + "?");
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO", (dialog, which) -> {
+                });
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES", (dialog, which) -> {
+                    db.getTeamDAO().deleteTeam(this.team);
+                    Intent intentDelete = new Intent(this, TeamListActivity.class);
+                    intentDelete.putExtra("deletedTeamName", this.team.teamName);
+                    setResult(RESULT_OK, intentDelete);
+                    finish();
+                });
+                alertDialog.show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

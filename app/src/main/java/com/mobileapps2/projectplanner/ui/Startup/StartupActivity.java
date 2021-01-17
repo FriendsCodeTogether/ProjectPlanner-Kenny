@@ -14,7 +14,6 @@ import com.mobileapps2.projectplanner.ui.teams.TeamListActivity;
 public class StartupActivity extends AppCompatActivity {
     private Button loginButton;
     private Button registerButton;
-    private SharedPreferences.Editor editor;
     SharedPreferences pref;
 
     @Override
@@ -23,7 +22,7 @@ public class StartupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_startup);
         loginButton = findViewById(R.id.LoginButton);
         registerButton = findViewById(R.id.RegisterButton);
-
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         loginButton.setOnClickListener((v -> {
             // TODO: Remove next comment before presentation
             // Intent intent = new Intent(this, TeamListActivity.class);
@@ -35,9 +34,16 @@ public class StartupActivity extends AppCompatActivity {
             startActivity(intent);
         }));
 
-        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        editor = pref.edit();
-        editor.putString("loggedInUser", "init");
-        editor.commit();
+        try {
+            String test = pref.getString("loggedInUser","");
+            if (!test.isEmpty()){
+                Intent intent = new Intent(this,TeamListActivity.class);
+                intent.putExtra("userName",pref.getString("loggedInUser",""));
+                startActivity(intent);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

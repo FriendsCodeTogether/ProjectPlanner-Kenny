@@ -20,21 +20,22 @@ import com.mobileapps2.projectplanner.data.DAOs.UserDAO;
 
 import java.util.ArrayList;
 
-public class AddTeamActivity extends AppCompatActivity {
+public class EditTeamActivity extends AppCompatActivity {
     private ProjectPlannerDb db;
     private TeamDAO teamDAO;
+    private UserDAO userDAO;
     private Button saveButton;
     private Button cancelButton;
     private EditText teamNameEditText;
     private ArrayList<Team> teamList = new ArrayList<>();
-    SharedPreferences pref;
-    private User user;
+    private Team team;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_team);
-        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        setContentView(R.layout.activity_edit_team);
+        Intent incommingIntent = getIntent();
+        team = (Team)incommingIntent.getSerializableExtra("team");
         initializeDatabase();
         initializeItems();
         addToolbar();
@@ -42,11 +43,9 @@ public class AddTeamActivity extends AppCompatActivity {
     }
 
     private void initializeItems() {
-        saveButton = findViewById(R.id.CreateTeamSaveButton);
-        cancelButton = findViewById(R.id.CreateTeamCancelButton);
-        teamNameEditText = findViewById(R.id.textInputEditText);
-        Intent incomingIntent = getIntent();
-        user = (User) incomingIntent.getSerializableExtra("user");
+        saveButton = findViewById(R.id.EditTeamSaveButton);
+        cancelButton = findViewById(R.id.EditTeamCancelButton);
+        teamNameEditText = findViewById(R.id.EditTeamNameEditText);
     }
 
     private void setListeners() {
@@ -63,18 +62,16 @@ public class AddTeamActivity extends AppCompatActivity {
         teamList.addAll(teamDAO.getAllTeams());
 
         if (teamName.isEmpty()) {
-            Toast.makeText(this, "Fill in team name", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Fill in team name", Toast.LENGTH_SHORT).show();
         }
         else if(verifyIfUnique(teamName) == false){
-            Toast.makeText(this, teamName + " already exists", Toast.LENGTH_SHORT );
+            Toast.makeText(this, teamName + " already exists", Toast.LENGTH_SHORT).show();
         }
         else{
-            Team newTeam = new Team();
-            newTeam.teamName = teamName;
-            newTeam.userId = user.userId;
-            teamDAO.insertTeam(newTeam);
+            team.teamName = teamName;
+            teamDAO.updateTeam(team);
             Intent intent = new Intent();
-            intent.putExtra("addedTeamName", newTeam.teamName);
+            intent.putExtra("updatedTeamName", team.teamName);
             setResult(RESULT_OK, intent);
             finish();
         }
@@ -106,5 +103,6 @@ public class AddTeamActivity extends AppCompatActivity {
     private void initializeDatabase() {
         db = ProjectPlannerDb.getInstance(this);
         teamDAO = db.getTeamDAO();
+        userDAO = db.getUserDAO();
     }
 }

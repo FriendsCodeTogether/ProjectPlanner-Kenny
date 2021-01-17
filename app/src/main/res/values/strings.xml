@@ -13,14 +13,14 @@
     <string name="board">Boards</string>
     <string name="navigateBoardButton">Boards</string>
     <string name="navigateTeamButton">Teams</string>
-    <string name="teams">Teams</string>
+    <string name="teams">My Teams</string>
     <string name="noTeamsLabel">You do not have any teams yet</string>
     <string name="contentDescription">Uitbreiding</string>
     <string name="addTeamTitle">Create New Team</string>
     <string name="teamNameHint">Team Name</string>
     <string name="SaveButton">Save</string>
     <string name="CancelButton">Cancel</string>
-    <string name="boards">Boards</string>
+    <string name="boards">: Boards</string>
     <string name="noBoardsLabel">This team doesn\'t have any boards yet</string>
     <string name="StartupWelcomeText">Welcome, ProjectPlanner requires you to be logged in</string>
     <string name="OrText">Or</string>
@@ -32,4 +32,12 @@
     <string name="AlreadyAccountText">Already have an account?</string>
     <string name="PasswordHint">Password</string>
     <string name="NoAccountYet">don\'t have an account?</string>
+    <string name="LogoutText">Logout</string>
+    <string name="action_Edit">Edit</string>
+    <string name="action_Delete">Delete</string>
+    <string name="EditTeamTitle">Edit Team</string>
+    <string name="addBoardTitle">Add Board</string>
+    <string name="BoardNameHint">Board Name</string>
+    <string name="BoardDescription">Description</string>
+    <string name="editBoardTitle">Edit Board</string>
 </resources>

@@ -102,7 +102,6 @@ public class RegisterActivity extends AppCompatActivity {
             userDAO.insertUser(newUser);
 
             Intent intent = new Intent(this, TeamListActivity.class);
-            intent.putExtra("userName", newUser.userName);
             editor.putString("loggedInUser", newUser.userName);
             editor.commit();
             startActivity(intent);
