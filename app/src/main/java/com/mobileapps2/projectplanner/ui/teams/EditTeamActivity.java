@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class EditTeamActivity extends AppCompatActivity {
     private ProjectPlannerDb db;
     private TeamDAO teamDAO;
-    private UserDAO userDAO;
     private Button saveButton;
     private Button cancelButton;
     private EditText teamNameEditText;
@@ -103,6 +102,5 @@ public class EditTeamActivity extends AppCompatActivity {
     private void initializeDatabase() {
         db = ProjectPlannerDb.getInstance(this);
         teamDAO = db.getTeamDAO();
-        userDAO = db.getUserDAO();
     }
 }

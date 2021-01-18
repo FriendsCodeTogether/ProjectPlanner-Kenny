@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 public class AddBoardActivity extends AppCompatActivity {
     private ProjectPlannerDb db;
-    private TeamDAO teamDAO;
     private BoardDAO boardDAO;
     private Button saveButton;
     private Button cancelButton;
@@ -103,7 +102,6 @@ public class AddBoardActivity extends AppCompatActivity {
 
     private void initializeDatabase() {
         db = ProjectPlannerDb.getInstance(this);
-        teamDAO = db.getTeamDAO();
         boardDAO = db.getBoardDAO();
     }
 }

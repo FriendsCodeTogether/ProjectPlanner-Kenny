@@ -39,7 +39,6 @@ public class BoardListActivity extends AppCompatActivity {
     private ProjectPlannerDb db;
     private TeamDAO teamDAO;
     private BoardDAO boardDAO;
-    private ArrayList<Team> teamList = new ArrayList<>();
     private ArrayList<Board> boardList = new ArrayList<>();
     private TextView noBoardsLabel;
     private ListView boardListView;
