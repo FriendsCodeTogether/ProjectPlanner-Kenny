@@ -40,4 +40,5 @@
     <string name="BoardNameHint">Board Name</string>
     <string name="BoardDescription">Description</string>
     <string name="editBoardTitle">Edit Board</string>
+    <string name="tasks">: tasks</string>
 </resources>

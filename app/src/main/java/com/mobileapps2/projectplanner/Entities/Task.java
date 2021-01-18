@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.intellij.lang.annotations.JdkConstants;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -39,6 +41,9 @@ public class Task implements Serializable {
 
     @ColumnInfo(name = "story_points")
     @NonNull public int storyPoints;
+
+    @ColumnInfo(name = "progress")
+    @NonNull public int progress;
 
     public Task() {this.taskId = UUID.randomUUID().toString();}
 

@@ -47,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
         initializeDatabase();
         initializeElements();
         setListeners();
-
     }
 
     private void setListeners() {
