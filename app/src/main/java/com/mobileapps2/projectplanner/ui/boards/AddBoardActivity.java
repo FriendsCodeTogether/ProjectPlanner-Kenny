@@ -29,7 +29,6 @@ public class AddBoardActivity extends AppCompatActivity {
     private Button cancelButton;
     private EditText boardNameEditText;
     private EditText boardDescriptionEditText;
-    private ArrayList<Board> boardList = new ArrayList<>();
     private Team team;
 
     @Override
@@ -64,8 +63,6 @@ public class AddBoardActivity extends AppCompatActivity {
     private void verifyFieldsAndSave() {
         String boardName = boardNameEditText.getText().toString();
         String boardDescription = boardDescriptionEditText.getText().toString();
-
-        boardList.addAll(boardDAO.getAllBoards());
 
         if (boardDescription.isEmpty()&&boardName.isEmpty()) {
             Toast.makeText(this, "All fields must be filled in", Toast.LENGTH_SHORT);

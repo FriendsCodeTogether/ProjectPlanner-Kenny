@@ -23,7 +23,7 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src\\main\\res', 'src\\main\\res\\layouts', 'src\\main\\res\\layouts\\boards', 'src\\main\\res\\layouts\\Test', 'src\\main\\res\\layouts\\core', 'src\\main\\res\\layouts\\teams', 'src\\main\\res\\layouts\\startup', 'src\\main\\res\\layouts\\tasks'
+                srcDirs 'src\\main\\res', 'src\\main\\res\\layouts', 'src\\main\\res\\layouts\\boards', 'src\\main\\res\\layouts\\Test', 'src\\main\\res\\layouts\\core', 'src\\main\\res\\layouts\\teams', 'src\\main\\res\\layouts\\startup', 'src\\main\\res\\layouts\\tasks', 'src\\main\\res\\layouts\\dialogs'
             }
         }
     }
@@ -52,5 +52,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.llollox:androidtoggleswitch:2.0.1'
     implementation 'com.shawnlin:number-picker:2.4.11'
-
 }

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Tasks.AddTaskActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/abc_vector_test">
+
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="@string/addTaskTitle"
+                android:textColor="@android:color/white" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/TaskNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/TaskNameHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/TaskDescriptionEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/TaskDescription"
+        app:layout_constraintEnd_toEndOf="@+id/TaskNameEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/TaskNameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/TaskNameEditText" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/TaskEpicEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/TaskEpic"
+        app:layout_constraintEnd_toEndOf="@+id/TaskDescriptionEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/TaskDescriptionEditText"
+        app:layout_constraintTop_toBottomOf="@+id/TaskDescriptionEditText" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/TaskStatusEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/statusHint"
+        android:focusableInTouchMode="false"
+        app:layout_constraintEnd_toEndOf="@+id/TaskEpicEditText"
+        app:layout_constraintStart_toStartOf="@+id/TaskEpicEditText"
+        app:layout_constraintTop_toBottomOf="@+id/TaskEpicEditText" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/TaskSprintEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/sprintHint"
+        android:focusableInTouchMode="false"
+        app:layout_constraintEnd_toEndOf="@+id/TaskEpicEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/TaskEpicEditText"
+        app:layout_constraintTop_toBottomOf="@+id/TaskProgressEditText" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/TaskBusinessValueEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/BusinessValueHint"
+        android:focusableInTouchMode="false"
+        app:layout_constraintEnd_toEndOf="@+id/TaskEpicEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/TaskEpicEditText"
+        app:layout_constraintTop_toBottomOf="@+id/TaskSprintEditText" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/TaskStorypointEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/storypointsHint"
+        android:focusableInTouchMode="false"
+        app:layout_constraintEnd_toEndOf="@+id/TaskEpicEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/TaskEpicEditText"
+        app:layout_constraintTop_toBottomOf="@+id/TaskBusinessValueEditText" />
+
+    <Button
+        android:id="@+id/CreateTaskSaveButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/SaveButton"
+        app:layout_constraintStart_toStartOf="@+id/TaskStorypointEditText"
+        app:layout_constraintTop_toBottomOf="@+id/TaskStorypointEditText" />
+
+    <Button
+        android:id="@+id/CreateTaskCancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/CancelButton"
+        app:layout_constraintBottom_toBottomOf="@+id/CreateTaskSaveButton"
+        app:layout_constraintEnd_toEndOf="@+id/TaskStorypointEditText"
+        app:layout_constraintTop_toTopOf="@+id/CreateTaskSaveButton" />
+
+    <EditText
+        android:id="@+id/TaskProgressEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/progressHint"
+        android:inputType="number"
+        android:focusableInTouchMode="false"
+        app:layout_constraintEnd_toEndOf="@+id/TaskStatusEditText"
+        app:layout_constraintStart_toStartOf="@+id/TaskStatusEditText"
+        app:layout_constraintTop_toBottomOf="@+id/TaskStatusEditText"
+        android:importantForAutofill="no" />
+</androidx.constraintlayout.widget.ConstraintLayout>
