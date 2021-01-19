@@ -33,8 +33,7 @@ public class EditTeamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_team);
-        Intent incommingIntent = getIntent();
-        team = (Team)incommingIntent.getSerializableExtra("team");
+
         initializeDatabase();
         initializeItems();
         addToolbar();
@@ -45,8 +44,13 @@ public class EditTeamActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.EditTeamSaveButton);
         cancelButton = findViewById(R.id.EditTeamCancelButton);
         teamNameEditText = findViewById(R.id.EditTeamNameEditText);
+        Intent incommingIntent = getIntent();
+        team = (Team)incommingIntent.getSerializableExtra("team");
+        fillInCurrentFields();
     }
-
+    private void fillInCurrentFields() {
+        teamNameEditText.setText(team.teamName);
+    }
     private void setListeners() {
         saveButton.setOnClickListener(v->{
             verifyFieldsAndSave();

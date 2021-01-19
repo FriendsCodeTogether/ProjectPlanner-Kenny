@@ -63,7 +63,7 @@ public class BoardListActivity extends AppCompatActivity {
     }
 
     private void getListItems() {
-        Team team = teamDAO.getTeamById(this.team.id);
+        team = teamDAO.getTeamById(this.team.id);
         teamName.setText(team.teamName);
         boardList.clear();
         boardList.addAll(boardDAO.getAllBoardsForTeam(team.teamId));
@@ -108,7 +108,6 @@ public class BoardListActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         //switch for the requests
         switch (requestCode) {
             case REQUEST_ADD_BOARD:
@@ -139,6 +138,7 @@ public class BoardListActivity extends AppCompatActivity {
         case REQUEST_EDIT_TEAM:
                 switch (resultCode) {
                     case RESULT_OK:
+
                         String editedTeamName = data.getStringExtra("updatedTeamName");
                         Toast.makeText(this, editedTeamName + " Edited", Toast.LENGTH_SHORT).show();
                         getListItems();

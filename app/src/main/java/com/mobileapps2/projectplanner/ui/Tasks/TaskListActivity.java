@@ -91,6 +91,7 @@ public class TaskListActivity extends AppCompatActivity {
                         String editedBoardName = data.getStringExtra("updatedBoardName");
                         Toast.makeText(this, editedBoardName + " Edited", Toast.LENGTH_SHORT).show();
                         boardName.setText(editedBoardName);
+                        board  = boardDAO.getBoardById(this.board.id);
                         break;
                     case RESULT_CANCELED:
                         break;

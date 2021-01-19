@@ -48,6 +48,12 @@ public class EditBoardActivity extends AppCompatActivity {
         boardDescriptionEditText = findViewById(R.id.EditBoardDescriptionEditText);
         Intent incommingIntent = getIntent();
         board = (Board) incommingIntent.getSerializableExtra("board");
+        fillInCurrentFields();
+    }
+
+    private void fillInCurrentFields() {
+        boardNameEditText.setText(board.boardName);
+        boardDescriptionEditText.setText(board.boardDescription);
     }
 
     private void setListeners() {
