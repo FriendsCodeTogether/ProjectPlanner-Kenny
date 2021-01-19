@@ -67,6 +67,15 @@ public class TaskListActivity extends AppCompatActivity {
         //switch for the requests
         switch (requestCode) {
             case REQUEST_ADD_TASK:
+                switch (resultCode) {
+                    case RESULT_OK:
+                        String addedTaskName = data.getStringExtra("addedTaskName");
+                        Toast.makeText(this, addedTaskName + " Added", Toast.LENGTH_SHORT).show();
+                        break;
+                    case RESULT_CANCELED:
+                        Toast.makeText(this, "Board Canceled", Toast.LENGTH_SHORT).show();
+                        break;
+                }
                 break;
             case REQUEST_DELETE_TASK:
                 switch (resultCode) {

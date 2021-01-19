@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.animation.TypeConverter;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,6 +38,9 @@ public class AddTaskActivity extends AppCompatActivity {
     private EditText taskBusinessValueEditText;
     private EditText taskStorypointEditText;
     private int taskProgress;
+    private int taskSprintNumber;
+    private String taskStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,18 +81,81 @@ public class AddTaskActivity extends AppCompatActivity {
     }
 
     private void onStorypointEditTextClick() {
+        final ConstraintLayout constraintLayout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.view_single_number_dialog, null);
+        NumberPicker numberPicker = constraintLayout.findViewById(R.id.NumberPicker);
+        String[] storypointValues = new String[]{"1","2","3","5","8","13","21"};
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(storypointValues.length);
+        numberPicker.setDisplayedValues(storypointValues);
+
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setTitle("StoryPoints")
+                .setPositiveButton("Submit", null)
+                .setNegativeButton("Cancel", null)
+                .setView(constraintLayout)
+                .setCancelable(false)
+                .create();
+        builder.show();
+
+        builder.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> {
+            int pickerValue = numberPicker.getValue();
+            taskStorypointEditText.setText(storypointValues[pickerValue-1]);
+            builder.dismiss();
+        });
     }
 
     private void onBusinessValueEditTextClick() {
+        final ConstraintLayout constraintLayout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.view_single_number_dialog, null);
+        NumberPicker numberPicker = constraintLayout.findViewById(R.id.NumberPicker);
+        String[] BusinessValues = new String[]{"1","2","3","5","8","13","21"};
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(BusinessValues.length);
+        numberPicker.setDisplayedValues(BusinessValues);
+
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setTitle("BusinessValue")
+                .setPositiveButton("Submit", null)
+                .setNegativeButton("Cancel", null)
+                .setView(constraintLayout)
+                .setCancelable(false)
+                .create();
+        builder.show();
+
+        builder.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> {
+            int pickerValue = numberPicker.getValue();
+            taskBusinessValueEditText.setText(BusinessValues[pickerValue-1]);
+            builder.dismiss();
+        });
     }
 
     private void onSprintEditTextClick() {
+        final ConstraintLayout constraintLayout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.view_single_number_dialog, null);
+        NumberPicker numberPicker = constraintLayout.findViewById(R.id.NumberPicker);
+        numberPicker.setMinValue(0);
+        numberPicker.setMaxValue(50);
+        numberPicker.setValue(0);
+
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setTitle("Sprint numbere")
+                .setPositiveButton("Submit", null)
+                .setNegativeButton("Cancel", null)
+                .setView(constraintLayout)
+                .setCancelable(false)
+                .create();
+        builder.show();
+
+        builder.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> {
+            taskSprintNumber = numberPicker.getValue();
+            taskSprintEditText.setText(taskSprintNumber+" ");
+            builder.dismiss();
+        });
     }
 
     private void onProgressEditTextClick() {
         final ConstraintLayout constraintLayout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.view_single_number_dialog, null);
         NumberPicker numberPicker = constraintLayout.findViewById(R.id.NumberPicker);
-
+        numberPicker.setMinValue(0);
+        numberPicker.setMaxValue(100);
         numberPicker.setValue(0);
 
         final AlertDialog builder = new AlertDialog.Builder(this)
@@ -100,7 +167,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 .create();
         builder.show();
 
-        builder.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener((View.OnClickListener) view -> {
+        builder.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> {
             taskProgress = numberPicker.getValue();
             taskProgressEditText.setText(taskProgress + "%");
             builder.dismiss();
@@ -108,16 +175,54 @@ public class AddTaskActivity extends AppCompatActivity {
     }
 
     private void onStatusEditTextClick() {
+        final ConstraintLayout constraintLayout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.view_single_number_dialog, null);
+        NumberPicker numberPicker = constraintLayout.findViewById(R.id.NumberPicker);
+        String[] statusValues = new String[]{"Product Backlog","Sprint Backlog","Busy","Done","Buggs & Defects"};
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(statusValues.length);
+        numberPicker.setDisplayedValues(statusValues);
+
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .setTitle("Statussen")
+                .setPositiveButton("Submit", null)
+                .setNegativeButton("Cancel", null)
+                .setView(constraintLayout)
+                .setCancelable(false)
+                .create();
+        builder.show();
+
+        builder.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> {
+            int pickerValue = numberPicker.getValue();
+            taskStatus = statusValues[pickerValue-1];
+            taskStatusEditText.setText(taskStatus);
+            builder.dismiss();
+        });
     }
 
     private void verifyFieldsAndSave() {
-
-        if (board==null){//TODO:CHECK IF FIELDS ARE FILLED IN
+        String taskName = taskNameEditText.getText().toString();
+        String taskDescription = taskDescriptionEditText.getText().toString();
+        String taskEpic = taskEpicEditText.getText().toString();
+        String taskStatus = taskStatusEditText.getText().toString();
+        String taskProgress = taskProgressEditText.getText().toString();
+        String taskSprint = taskSprintEditText.getText().toString();
+        String taskBusinessValue = taskBusinessValueEditText.getText().toString();
+        String taskStorypoints = taskStorypointEditText.getText().toString();
+        if (taskName.isEmpty()||taskDescription.isEmpty()||taskEpic.isEmpty()||taskStatus.isEmpty()||taskProgress.isEmpty()||taskSprint.isEmpty()||taskBusinessValue.isEmpty()||taskStorypoints.isEmpty()){//TODO:CHECK IF FIELDS ARE FILLED IN
             Toast.makeText(this, "All fields must be filled in", Toast.LENGTH_SHORT);
         }
         else{
-            //TODO: FILL IN TASK
             Task newTask = new Task();
+            newTask.taskName = taskName;
+            newTask.description = taskDescription;
+            newTask.epic = taskEpic;
+            newTask.status = taskStatus;
+            newTask.progress = this.taskProgress;
+            newTask.sprint = taskSprintNumber;
+            newTask.businessValue = Integer.parseInt(taskBusinessValue);
+            newTask.storyPoints = Integer.parseInt(taskStorypoints);
+            newTask.boardId = board.boardId;
+            taskDAO.insertTask(newTask);
             Intent intent = new Intent();
             intent.putExtra("addedTaskName",newTask.taskName);
             setResult(RESULT_OK, intent);
