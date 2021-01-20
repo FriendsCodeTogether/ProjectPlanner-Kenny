@@ -1,11 +1,9 @@
-package com.mobileapps2.projectplanner.Entities;
+package com.mobileapps2.projectplanner.data.Entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import org.intellij.lang.annotations.JdkConstants;
 
 import java.io.Serializable;
 import java.util.UUID;

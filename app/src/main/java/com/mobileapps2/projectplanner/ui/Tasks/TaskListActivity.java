@@ -14,17 +14,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mobileapps2.projectplanner.Entities.Board;
-import com.mobileapps2.projectplanner.Entities.Team;
+import com.mobileapps2.projectplanner.data.Entities.Board;
+import com.mobileapps2.projectplanner.data.Entities.Team;
 import com.mobileapps2.projectplanner.ProjectPlannerDb;
 import com.mobileapps2.projectplanner.R;
 import com.mobileapps2.projectplanner.data.DAOs.BoardDAO;
 import com.mobileapps2.projectplanner.data.DAOs.TeamDAO;
-import com.mobileapps2.projectplanner.ui.boards.AddBoardActivity;
 import com.mobileapps2.projectplanner.ui.boards.BoardListActivity;
 import com.mobileapps2.projectplanner.ui.boards.EditBoardActivity;
-import com.mobileapps2.projectplanner.ui.teams.EditTeamActivity;
-import com.mobileapps2.projectplanner.ui.teams.TeamListActivity;
 
 import java.util.ArrayList;
 

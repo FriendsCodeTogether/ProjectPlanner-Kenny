@@ -20,7 +20,18 @@ import com.mobileapps2.projectplanner.R;
 import com.mobileapps2.projectplanner.data.DAOs.TaskDAO;
 import com.shawnlin.numberpicker.NumberPicker;
 
-public class AddTaskActivity extends AppCompatActivity {
+public class EditTaskActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_task);
+
+        initializeDatabase();
+        initializeItems();
+        addToolbar();
+        setListeners();
+    }
     private ProjectPlannerDb db;
     private TaskDAO taskDAO;
     private Button saveButton;
@@ -38,16 +49,6 @@ public class AddTaskActivity extends AppCompatActivity {
     private int taskSprintNumber;
     private String taskStatus;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_task);
-
-        initializeDatabase();
-        initializeItems();
-        addToolbar();
-        setListeners();
-    }
     private void initializeItems() {
         saveButton = findViewById(R.id.CreateTaskSaveButton);
         cancelButton = findViewById(R.id.CreateTaskCancelButton);
@@ -246,4 +247,5 @@ public class AddTaskActivity extends AppCompatActivity {
         db = ProjectPlannerDb.getInstance(this);
         taskDAO = db.getTaskDAO();
     }
+
 }

@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.mobileapps2.projectplanner.Entities.User;
+import com.mobileapps2.projectplanner.data.Entities.User;
 
 import java.util.List;
 

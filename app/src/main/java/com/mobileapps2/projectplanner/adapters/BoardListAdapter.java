@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.mobileapps2.projectplanner.Entities.Board;
+import com.mobileapps2.projectplanner.data.Entities.Board;
 import com.mobileapps2.projectplanner.R;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.mobileapps2.projectplanner.Entities;
+package com.mobileapps2.projectplanner.data.Entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

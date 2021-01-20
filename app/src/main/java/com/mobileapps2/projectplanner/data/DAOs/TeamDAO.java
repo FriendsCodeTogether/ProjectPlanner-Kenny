@@ -7,9 +7,8 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
-import com.mobileapps2.projectplanner.Entities.Team;
+import com.mobileapps2.projectplanner.data.Entities.Team;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao

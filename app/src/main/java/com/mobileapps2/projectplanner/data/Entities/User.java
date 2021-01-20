@@ -1,7 +1,6 @@
-package com.mobileapps2.projectplanner.Entities;
+package com.mobileapps2.projectplanner.data.Entities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

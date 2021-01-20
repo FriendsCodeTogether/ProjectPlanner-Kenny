@@ -10,13 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.mobileapps2.projectplanner.Entities.Board;
-import com.mobileapps2.projectplanner.Entities.Team;
+import com.mobileapps2.projectplanner.data.Entities.Board;
 import com.mobileapps2.projectplanner.ProjectPlannerDb;
 import com.mobileapps2.projectplanner.R;
 import com.mobileapps2.projectplanner.data.DAOs.BoardDAO;
-import com.mobileapps2.projectplanner.data.DAOs.TeamDAO;
-import com.mobileapps2.projectplanner.data.DAOs.UserDAO;
 
 import java.util.ArrayList;
 

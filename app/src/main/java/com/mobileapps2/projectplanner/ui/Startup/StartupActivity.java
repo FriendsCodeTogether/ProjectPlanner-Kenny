@@ -20,20 +20,13 @@ public class StartupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
-        loginButton = findViewById(R.id.LoginButton);
-        registerButton = findViewById(R.id.RegisterButton);
-        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        loginButton.setOnClickListener((v -> {
-            // TODO: Remove next comment before presentation
-            // Intent intent = new Intent(this, TeamListActivity.class);
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }));
-        registerButton.setOnClickListener((v -> {
-            Intent intent = new Intent(this, RegisterActivity.class);
-            startActivity(intent);
-        }));
 
+        initializeItems();
+        setEventListeners();
+        tryAutologin();
+    }
+
+    private void tryAutologin() {
         try {
             String test = pref.getString("loggedInUser","");
             if (!test.isEmpty()){
@@ -45,5 +38,22 @@ public class StartupActivity extends AppCompatActivity {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void setEventListeners() {
+        loginButton.setOnClickListener((v -> {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }));
+        registerButton.setOnClickListener((v -> {
+            Intent intent = new Intent(this, RegisterActivity.class);
+            startActivity(intent);
+        }));
+    }
+
+    private void initializeItems() {
+        loginButton = findViewById(R.id.LoginButton);
+        registerButton = findViewById(R.id.RegisterButton);
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
     }
 }

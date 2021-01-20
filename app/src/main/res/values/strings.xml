@@ -50,4 +50,5 @@
     <string name="sprintHint">Sprint</string>
     <string name="BusinessValueHint">Business Value</string>
     <string name="storypointsHint">Storypoints</string>
+    <string name="addButton">plus</string>
 </resources>
