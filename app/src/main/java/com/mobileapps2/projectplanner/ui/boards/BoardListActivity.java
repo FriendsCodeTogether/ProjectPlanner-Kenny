@@ -15,14 +15,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mobileapps2.projectplanner.Entities.Board;
-import com.mobileapps2.projectplanner.Entities.Team;
-import com.mobileapps2.projectplanner.Entities.User;
+import com.mobileapps2.projectplanner.data.Entities.Board;
+import com.mobileapps2.projectplanner.data.Entities.Team;
 import com.mobileapps2.projectplanner.ProjectPlannerDb;
 import com.mobileapps2.projectplanner.R;
 import com.mobileapps2.projectplanner.adapters.BoardListAdapter;
 import com.mobileapps2.projectplanner.data.DAOs.BoardDAO;
 import com.mobileapps2.projectplanner.data.DAOs.TeamDAO;
+import com.mobileapps2.projectplanner.ui.Tasks.TaskListActivity;
 import com.mobileapps2.projectplanner.ui.teams.EditTeamActivity;
 import com.mobileapps2.projectplanner.ui.teams.TeamListActivity;
 
@@ -37,7 +37,6 @@ public class BoardListActivity extends AppCompatActivity {
     private ProjectPlannerDb db;
     private TeamDAO teamDAO;
     private BoardDAO boardDAO;
-    private ArrayList<Team> teamList = new ArrayList<>();
     private ArrayList<Board> boardList = new ArrayList<>();
     private TextView noBoardsLabel;
     private ListView boardListView;
@@ -62,10 +61,10 @@ public class BoardListActivity extends AppCompatActivity {
     }
 
     private void getListItems() {
-        Team team = teamDAO.getTeamById(this.team.id);
+        team = teamDAO.getTeamById(this.team.id);
         teamName.setText(team.teamName);
         boardList.clear();
-        boardList.addAll(boardDAO.getAllBoards());
+        boardList.addAll(boardDAO.getAllBoardsForTeam(team.teamId));
         if (boardList.size()==0)
         {
             noBoardsLabel.setVisibility(View.VISIBLE);
@@ -85,6 +84,13 @@ public class BoardListActivity extends AppCompatActivity {
             intent.putExtra("team",team);
             startActivityForResult(intent,REQUEST_ADD_BOARD);
         });
+        boardListView.setOnItemClickListener((parent, view, position, id) -> {
+            Board board = boardList.get(position);
+            Intent intent = new Intent(this, TaskListActivity.class);
+            intent.putExtra("board",board);
+            startActivityForResult(intent,REQUEST_DELETE_BOARD);
+        });
+
     }
 
     private void initializeElements() {
@@ -100,7 +106,6 @@ public class BoardListActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         //switch for the requests
         switch (requestCode) {
             case REQUEST_ADD_BOARD:
@@ -131,6 +136,7 @@ public class BoardListActivity extends AppCompatActivity {
         case REQUEST_EDIT_TEAM:
                 switch (resultCode) {
                     case RESULT_OK:
+
                         String editedTeamName = data.getStringExtra("updatedTeamName");
                         Toast.makeText(this, editedTeamName + " Edited", Toast.LENGTH_SHORT).show();
                         getListItems();

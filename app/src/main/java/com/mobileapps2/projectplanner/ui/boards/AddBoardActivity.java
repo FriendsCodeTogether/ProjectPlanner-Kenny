@@ -4,33 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.mobileapps2.projectplanner.Entities.Board;
-import com.mobileapps2.projectplanner.Entities.Team;
-import com.mobileapps2.projectplanner.Entities.User;
+import com.mobileapps2.projectplanner.data.Entities.Board;
+import com.mobileapps2.projectplanner.data.Entities.Team;
 import com.mobileapps2.projectplanner.ProjectPlannerDb;
 import com.mobileapps2.projectplanner.R;
 import com.mobileapps2.projectplanner.data.DAOs.BoardDAO;
-import com.mobileapps2.projectplanner.data.DAOs.TeamDAO;
-import com.mobileapps2.projectplanner.data.DAOs.UserDAO;
-
-import java.util.ArrayList;
 
 public class AddBoardActivity extends AppCompatActivity {
     private ProjectPlannerDb db;
-    private TeamDAO teamDAO;
     private BoardDAO boardDAO;
     private Button saveButton;
     private Button cancelButton;
     private EditText boardNameEditText;
     private EditText boardDescriptionEditText;
-    private ArrayList<Board> boardList = new ArrayList<>();
     private Team team;
 
     @Override
@@ -65,8 +57,6 @@ public class AddBoardActivity extends AppCompatActivity {
     private void verifyFieldsAndSave() {
         String boardName = boardNameEditText.getText().toString();
         String boardDescription = boardDescriptionEditText.getText().toString();
-
-        boardList.addAll(boardDAO.getAllBoards());
 
         if (boardDescription.isEmpty()&&boardName.isEmpty()) {
             Toast.makeText(this, "All fields must be filled in", Toast.LENGTH_SHORT);
@@ -103,7 +93,6 @@ public class AddBoardActivity extends AppCompatActivity {
 
     private void initializeDatabase() {
         db = ProjectPlannerDb.getInstance(this);
-        teamDAO = db.getTeamDAO();
         boardDAO = db.getBoardDAO();
     }
 }

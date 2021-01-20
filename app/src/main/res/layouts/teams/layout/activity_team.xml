@@ -35,7 +35,8 @@
                 android:id="@+id/LogoutButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="160dp"
+                android:layout_marginStart="160dp"
+                android:backgroundTint="@color/colorAccent"
                 android:text="@string/LogoutText" />
         </androidx.appcompat.widget.Toolbar>
 
@@ -72,7 +73,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/teamsTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/teamsTitle"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/addButton" />
 
     <TextView
         android:id="@+id/noTeamsLabel"

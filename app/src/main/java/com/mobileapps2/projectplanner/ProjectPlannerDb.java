@@ -7,9 +7,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.mobileapps2.projectplanner.data.DAOs.*;
-import com.mobileapps2.projectplanner.Entities.*;
+import com.mobileapps2.projectplanner.data.Entities.*;
 
-@Database(entities = {Board.class, Task.class, Team.class, User.class},version =5,exportSchema = false)
+@Database(entities = {Board.class, Task.class, Team.class, User.class},version =6,exportSchema = false)
 public abstract class ProjectPlannerDb extends RoomDatabase{
     private static ProjectPlannerDb minstance;
     private static final String DB_NAME = "projectPlanner.db";

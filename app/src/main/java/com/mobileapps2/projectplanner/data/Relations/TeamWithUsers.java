@@ -3,9 +3,8 @@ package com.mobileapps2.projectplanner.data.Relations;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-import com.mobileapps2.projectplanner.Entities.Board;
-import com.mobileapps2.projectplanner.Entities.Team;
-import com.mobileapps2.projectplanner.Entities.User;
+import com.mobileapps2.projectplanner.data.Entities.Team;
+import com.mobileapps2.projectplanner.data.Entities.User;
 
 import java.util.List;
 

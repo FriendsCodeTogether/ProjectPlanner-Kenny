@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Tasks.ShowTaskActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/abc_vector_test">
+
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="@string/app_name"
+                android:textColor="@android:color/white"/>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/TasksDetailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/tasksDetails"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/background_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TasksDetailTitle" />
+
+    <TextView
+        android:id="@+id/TaskNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/TaskDescriptionTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/TaskNameTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/TaskNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/TaskNameTextView" />
+
+    <TextView
+        android:id="@+id/TaskEpicTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/TaskEpicTextViewTitle"
+        app:layout_constraintEnd_toEndOf="@+id/TaskDescriptionTextView"
+        app:layout_constraintStart_toEndOf="@+id/TaskEpicTextViewTitle"
+        app:layout_constraintTop_toTopOf="@+id/TaskEpicTextViewTitle" />
+
+    <TextView
+        android:id="@+id/TaskStatusTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/TaskEpicTextView"
+        app:layout_constraintStart_toEndOf="@+id/TaskStatusTextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/TaskEpicTextView" />
+
+    <TextView
+        android:id="@+id/TaskProgressTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/TaskStatusTextView"
+        app:layout_constraintStart_toEndOf="@+id/TaskProgresTextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/TaskStatusTextView" />
+
+    <TextView
+        android:id="@+id/TaskSprintTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/TaskProgressTextView"
+        app:layout_constraintStart_toEndOf="@+id/TaskSprintTextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/TaskProgressTextView" />
+
+    <TextView
+        android:id="@+id/TaskBValueTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/TaskSprintTextView"
+        app:layout_constraintStart_toEndOf="@+id/TaskBValueTextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/TaskSprintTextView" />
+
+    <TextView
+        android:id="@+id/TaskStorypointsTextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/StorypointsText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/TaskBValueTextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/TaskBValueTextViewTitle" />
+
+    <TextView
+        android:id="@+id/TaskBValueTextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/bValueText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/TaskSprintTextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/TaskSprintTextViewTitle" />
+
+    <TextView
+        android:id="@+id/TaskStatusTextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/statusText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/TaskEpicTextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/TaskEpicTextViewTitle" />
+
+    <TextView
+        android:id="@+id/TaskSprintTextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/SprintText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/TaskProgresTextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/TaskProgresTextViewTitle" />
+
+    <TextView
+        android:id="@+id/TaskEpicTextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/TaskEpicText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/TaskDescriptionTextView"
+        app:layout_constraintTop_toBottomOf="@+id/TaskDescriptionTextView" />
+
+    <TextView
+        android:id="@+id/TaskProgresTextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/progressText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/TaskStatusTextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/TaskStatusTextViewTitle" />
+
+    <TextView
+        android:id="@+id/TaskStorypointsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/TaskBValueTextView"
+        app:layout_constraintStart_toEndOf="@+id/TaskStorypointsTextViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/TaskBValueTextView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

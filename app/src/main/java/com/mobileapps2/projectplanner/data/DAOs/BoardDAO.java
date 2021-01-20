@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.mobileapps2.projectplanner.Entities.Board;
+import com.mobileapps2.projectplanner.data.Entities.Board;
 
 import java.util.List;
 
@@ -26,4 +26,7 @@ public interface BoardDAO {
 
     @Query("SELECT * FROM board WHERE id = :id")
     Board getBoardById(int id);
+
+    @Query("SELECT * FROM board WHERE team_id = :teamId")
+    List<Board> getAllBoardsForTeam(String teamId);
 }

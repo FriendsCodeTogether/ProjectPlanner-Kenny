@@ -1,4 +1,4 @@
-package com.mobileapps2.projectplanner.Entities;
+package com.mobileapps2.projectplanner.data.Entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -39,6 +39,9 @@ public class Task implements Serializable {
 
     @ColumnInfo(name = "story_points")
     @NonNull public int storyPoints;
+
+    @ColumnInfo(name = "progress")
+    @NonNull public int progress;
 
     public Task() {this.taskId = UUID.randomUUID().toString();}
 
