@@ -51,4 +51,13 @@
     <string name="BusinessValueHint">Business Value</string>
     <string name="storypointsHint">Storypoints</string>
     <string name="addButton">plus</string>
+    <string name="noTasksLabel">This board doesn\'t have any tasks yet</string>
+    <string name="statusText">"Status: "</string>
+    <string name="editTaskTitle">Edit Task</string>
+    <string name="TaskEpicText">"Epic: "</string>
+    <string name="progressText">Progress:</string>
+    <string name="SprintText">"Sprint: "</string>
+    <string name="bValueText">"Business Value: "</string>
+    <string name="StorypointsText">"storypoints: "</string>
+    <string name="tasksDetails">Task Details</string>
 </resources>

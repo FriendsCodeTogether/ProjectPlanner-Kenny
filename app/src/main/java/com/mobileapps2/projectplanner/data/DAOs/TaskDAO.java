@@ -24,6 +24,9 @@ public interface TaskDAO {
     @Query("SELECT * FROM task")
     List<Task> getAllTasks();
 
-    @Query("SELECT * FROM task WHERE id = :id")
-    Task getTaskById(int id);
+    @Query("SELECT * FROM task WHERE task_id = :id")
+    Task getTaskById(String id);
+
+    @Query("SELECT * FROM task WHERE board_id = :id ORDER BY status ASC")
+    List<Task> getAllTasksByBoardId(String id);
 }

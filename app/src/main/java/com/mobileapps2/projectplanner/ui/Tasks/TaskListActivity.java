@@ -9,12 +9,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mobileapps2.projectplanner.adapters.BoardListAdapter;
+import com.mobileapps2.projectplanner.adapters.TaskListAdapter;
+import com.mobileapps2.projectplanner.data.DAOs.TaskDAO;
 import com.mobileapps2.projectplanner.data.Entities.Board;
+import com.mobileapps2.projectplanner.data.Entities.Task;
 import com.mobileapps2.projectplanner.data.Entities.Team;
 import com.mobileapps2.projectplanner.ProjectPlannerDb;
 import com.mobileapps2.projectplanner.R;
@@ -31,15 +36,17 @@ public class TaskListActivity extends AppCompatActivity {
     private static final int REQUEST_DELETE_TASK = 2;
     private static final int REQUEST_EDIT_BOARD = 3;
     private ProjectPlannerDb db;
-    private TeamDAO teamDAO;
+    private TaskDAO taskDAO;
     private BoardDAO boardDAO;
-    private ArrayList<Team> teamList = new ArrayList<>();
+    private ArrayList<Task> taskList = new ArrayList<>();
     private ArrayList<Board> boardList = new ArrayList<>();
-    private TextView noBoardsLabel;
-    private ListView boardListView;
+    private TextView noTasksLabel;
+    private ListView taskListView;
     private TextView boardName;
     private ImageButton createTaskButton;
     private Board board;
+    private Task task;
+    private String editedBoardName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,7 @@ public class TaskListActivity extends AppCompatActivity {
         initializeElements();
         addToolbar();
         setListeners();
+        getListItems();
     }
 
     @Override
@@ -68,6 +76,7 @@ public class TaskListActivity extends AppCompatActivity {
                     case RESULT_OK:
                         String addedTaskName = data.getStringExtra("addedTaskName");
                         Toast.makeText(this, addedTaskName + " Added", Toast.LENGTH_SHORT).show();
+                        getListItems();
                         break;
                     case RESULT_CANCELED:
                         Toast.makeText(this, "Board Canceled", Toast.LENGTH_SHORT).show();
@@ -77,28 +86,52 @@ public class TaskListActivity extends AppCompatActivity {
             case REQUEST_DELETE_TASK:
                 switch (resultCode) {
                     case RESULT_OK:
+                        String deletedTaskName = data.getStringExtra("deletedTaskName");
+                        Toast.makeText(this, deletedTaskName + " Deleted", Toast.LENGTH_SHORT).show();
+                        getListItems();
                         break;
                     case RESULT_CANCELED:
+                        getListItems();
                         break;
                 }
                 break;
             case REQUEST_EDIT_BOARD:
                 switch (resultCode) {
                     case RESULT_OK:
-                        String editedBoardName = data.getStringExtra("updatedBoardName");
+                        editedBoardName = data.getStringExtra("updatedBoardName");
                         Toast.makeText(this, editedBoardName + " Edited", Toast.LENGTH_SHORT).show();
-                        boardName.setText(editedBoardName);
                         board  = boardDAO.getBoardById(this.board.id);
+                        getListItems();
                         break;
                     case RESULT_CANCELED:
+                        getListItems();
                         break;
                 }
                 break;
         }
     }
+
+    private void getListItems() {
+        board = boardDAO.getBoardById(this.board.id);
+        boardName.setText(board.boardName);
+        taskList.clear();
+        taskList.addAll(taskDAO.getAllTasksByBoardId(board.boardId));
+        if (taskList.size()==0)
+        {
+            noTasksLabel.setVisibility(View.VISIBLE);
+            taskListView.setAdapter(null);
+        }
+        else
+        {
+            noTasksLabel.setVisibility(View.INVISIBLE);
+            TaskListAdapter adapter = new TaskListAdapter(this, R.layout.task_list_item, taskList);
+            taskListView.setAdapter(adapter);
+        }
+    }
+
     private void initializeElements() {
-        noBoardsLabel = findViewById(R.id.noBoardsLabel);
-        boardListView = findViewById(R.id.BoardsList);
+        noTasksLabel = findViewById(R.id.noTasksLabel);
+        taskListView = findViewById(R.id.TaskList);
         createTaskButton = findViewById(R.id.AddTaskButton);
         boardName = findViewById(R.id.BoardNameTitle);
         Intent incomingIntent = getIntent();
@@ -112,11 +145,17 @@ public class TaskListActivity extends AppCompatActivity {
             intent.putExtra("board",board);
             startActivityForResult(intent,REQUEST_ADD_TASK);
         });
+        taskListView.setOnItemClickListener(((parent, view, position, id) -> {
+            Task task = taskList.get(position);
+            Intent intent = new Intent(this,ShowTaskActivity.class);
+            intent.putExtra("task",task);
+            startActivityForResult(intent, REQUEST_DELETE_TASK);
+        }));
     }
 
     private void initializeDatabase() {
         db = ProjectPlannerDb.getInstance(this);
-        teamDAO = db.getTeamDAO();
+        taskDAO = db.getTaskDAO();
         boardDAO = db.getBoardDAO();
     }
 

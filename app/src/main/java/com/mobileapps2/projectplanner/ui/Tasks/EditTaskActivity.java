@@ -21,22 +21,11 @@ import com.mobileapps2.projectplanner.data.DAOs.TaskDAO;
 import com.shawnlin.numberpicker.NumberPicker;
 
 public class EditTaskActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_task);
-
-        initializeDatabase();
-        initializeItems();
-        addToolbar();
-        setListeners();
-    }
     private ProjectPlannerDb db;
     private TaskDAO taskDAO;
     private Button saveButton;
     private Button cancelButton;
-    private Board board;
+    private Task task;
     private EditText taskNameEditText;
     private EditText taskDescriptionEditText;
     private EditText taskEpicEditText;
@@ -49,19 +38,44 @@ public class EditTaskActivity extends AppCompatActivity {
     private int taskSprintNumber;
     private String taskStatus;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_task);
+
+        initializeDatabase();
+        initializeItems();
+        addToolbar();
+        setListeners();
+
+    }
+
+    private void fillInFields() {
+        taskNameEditText.setText(task.taskName);
+        taskDescriptionEditText.setText(task.description);
+        taskEpicEditText.setText(task.epic);
+        taskStatusEditText.setText(task.status);
+        taskProgressEditText.setText(task.progress+" %");
+        taskSprintEditText.setText(task.sprint+"");
+        taskBusinessValueEditText.setText(task.businessValue+"");
+        taskStorypointEditText.setText(task.storyPoints+"");
+    }
+
+
     private void initializeItems() {
-        saveButton = findViewById(R.id.CreateTaskSaveButton);
-        cancelButton = findViewById(R.id.CreateTaskCancelButton);
-        taskNameEditText = findViewById(R.id.TaskNameEditText);
-        taskDescriptionEditText = findViewById(R.id.TaskDescriptionEditText);
-        taskEpicEditText = findViewById(R.id.TaskEpicEditText);
-        taskStatusEditText = findViewById(R.id.TaskStatusEditText);
-        taskProgressEditText = findViewById(R.id.TaskProgressEditText);
-        taskSprintEditText = findViewById(R.id.TaskSprintEditText);
-        taskBusinessValueEditText = findViewById(R.id.TaskBusinessValueEditText);
-        taskStorypointEditText = findViewById(R.id.TaskStorypointEditText);
+        saveButton = findViewById(R.id.EditTaskSaveButton);
+        cancelButton = findViewById(R.id.EditTaskCancelButton);
+        taskNameEditText = findViewById(R.id.EditTaskNameEditText);
+        taskDescriptionEditText = findViewById(R.id.EditTaskDescriptionEditText);
+        taskEpicEditText = findViewById(R.id.EditTaskEpicEditText);
+        taskStatusEditText = findViewById(R.id.EditTaskStatusEditText);
+        taskProgressEditText = findViewById(R.id.EditTaskProgressEditText);
+        taskSprintEditText = findViewById(R.id.EditTaskSprintEditText);
+        taskBusinessValueEditText = findViewById(R.id.EditTaskBusinessValueEditText);
+        taskStorypointEditText = findViewById(R.id.EditTaskStorypointEditText);
         Intent incomingIntent = getIntent();
-        board = (Board) incomingIntent.getSerializableExtra("board");
+        task = (Task) incomingIntent.getSerializableExtra("task");
+        fillInFields();
     }
 
     private void setListeners() {
@@ -210,19 +224,17 @@ public class EditTaskActivity extends AppCompatActivity {
             Toast.makeText(this, "All fields must be filled in", Toast.LENGTH_SHORT);
         }
         else{
-            Task newTask = new Task();
-            newTask.taskName = taskName;
-            newTask.description = taskDescription;
-            newTask.epic = taskEpic;
-            newTask.status = taskStatus;
-            newTask.progress = this.taskProgress;
-            newTask.sprint = taskSprintNumber;
-            newTask.businessValue = Integer.parseInt(taskBusinessValue);
-            newTask.storyPoints = Integer.parseInt(taskStorypoints);
-            newTask.boardId = board.boardId;
-            taskDAO.insertTask(newTask);
+            task.taskName = taskName;
+            task.description = taskDescription;
+            task.epic = taskEpic;
+            task.status = taskStatus;
+            task.progress = this.taskProgress;
+            task.sprint = taskSprintNumber;
+            task.businessValue = Integer.parseInt(taskBusinessValue);
+            task.storyPoints = Integer.parseInt(taskStorypoints);
+            taskDAO.updateTask(task);
             Intent intent = new Intent();
-            intent.putExtra("addedTaskName",newTask.taskName);
+            intent.putExtra("editedTaskName",task.taskName);
             setResult(RESULT_OK, intent);
             finish();
         }
